@@ -440,6 +440,15 @@ with st.sidebar:
 if page == "📊 District Dashboard":
     st.title(f"District Dashboard: {selected_district}")
 
+    st.markdown(f"""
+    The **Type 4 student** speaks well but writes poorly — the "oral-written delta." VERA computes
+    this using CAASPP ELA Claim 2 (writing) scores against ELPAC speaking scores. When speaking
+    exceeds writing by **8+ points**, these students may be receiving inappropriate oral language
+    interventions when they need writing support. They're invisible in aggregate reporting.
+    """)
+
+    st.markdown("---")
+
     district_info = districts[districts['district_name'] == selected_district].iloc[0]
     st.markdown(f"**{district_info['county']} County** | District ID: `{district_info['district_id']}`")
 
@@ -548,7 +557,13 @@ if page == "📊 District Dashboard":
 
 elif page == "🔍 Cross-District Scan":
     st.title("Cross-District Type 4 Scan")
-    st.markdown("Identifies oral-written delta flags across all districts in the database.")
+
+    st.markdown("""
+    **AB 2225** requires assessment of strategies to close pupil academic achievement gaps.
+    This scan identifies Type 4 concentrations across all California districts — students that
+    traditional reporting leaves invisible. No new data collection. No burden on districts.
+    Just verification of what the existing data already shows.
+    """)
 
     threshold = st.slider("Delta Threshold", min_value=5.0, max_value=15.0, value=8.0, step=0.5)
 
@@ -627,6 +642,15 @@ elif page == "🔍 Cross-District Scan":
 
 elif page == "📋 LCAP Report":
     st.title(f"LCAP Match-Rate Report")
+
+    st.markdown("""
+    California spends **$142 billion annually** on K-12 education, with $8-10 billion specifically
+    targeted at high-need students through LCFF supplemental grants. The Local Control Accountability
+    Plan (LCAP) directs these funds — but do they actually reach the students who generated them?
+    VERA's match-rate analysis verifies alignment between LCAP spending and student need.
+    """)
+
+    st.markdown("---")
     st.markdown(f"**District:** {selected_district}")
 
     district_info = districts[districts['district_name'] == selected_district].iloc[0]
@@ -1088,6 +1112,18 @@ elif page == "📅 Daily Observations":
 
 elif page == "ℹ️ About VERA":
     st.title("About VERA-CA")
+
+    st.markdown(f"""
+    <div style="background: {NAVY}; color: white; padding: 24px; border-radius: 8px; margin-bottom: 24px;">
+        <p style="font-size: 1.1rem; margin: 0; line-height: 1.7;">
+            <strong style="color: {GOLD};">AB 2225</strong> (Closing the Achievement Gap Act) opens competitive
+            procurement by <strong>March 2027</strong>. The working group must deliver a plan by
+            <strong>December 2027</strong>. VERA exists because the Type 4 student is not a data point
+            in any state system — no large firm's proposal will name that student.
+            <strong style="color: {GOLD};">H-EDU built VERA because of that emergency.</strong>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("""
     ## Verification Engine for Results & Accountability
