@@ -272,8 +272,9 @@ def check_authentication():
 
     return False
 
-if not check_authentication():
-    st.stop()
+# Authentication disabled - public access
+# if not check_authentication():
+#     st.stop()
 
 # =============================================================================
 # Database Connection
