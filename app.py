@@ -412,9 +412,19 @@ with st.sidebar:
     # District selector (for relevant pages)
     if page in ["📊 District Dashboard", "📋 LCAP Report", "🏫 Admin Dashboard"]:
         districts = get_districts()
+
+        # County filter for easier navigation with 937 districts
+        counties = ["All Counties"] + sorted(districts['county'].unique().tolist())
+        selected_county = st.selectbox("Filter by County", counties)
+
+        if selected_county != "All Counties":
+            filtered_districts = districts[districts['county'] == selected_county]['district_name'].tolist()
+        else:
+            filtered_districts = districts['district_name'].tolist()
+
         selected_district = st.selectbox(
-            "Select District",
-            districts['district_name'].tolist()
+            f"Select District ({len(filtered_districts)})",
+            filtered_districts
         )
 
         district_data = get_caaspp_data(selected_district)
